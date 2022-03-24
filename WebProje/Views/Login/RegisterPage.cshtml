@@ -1,0 +1,70 @@
+﻿@model WebProje.Models.User
+@{
+    ViewBag.Title = "RegisterPage";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/myStyle.css")">
+    <body class="Login">
+        <h1>Register</h1>
+        <h3>Create a new account.</h3>
+
+        <div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-5">
+                    @using (Html.BeginForm("RegisterPage", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <h4>First Name</h4>
+                                    @Html.TextBoxFor(m => m.FirstName, "", new { @class = "form-control", @placeholder = "First Name" })
+                                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "badge badge-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <h4>Last Name</h4>
+                                    @Html.TextBoxFor(m => m.LastName, "", new { @class = "form-control", @placeholder = "Last Name" })
+                                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "badge badge-danger" })
+
+                                </div>
+                                <div class="form-group">
+                                    <h4>Email</h4>
+                                    @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge badge-danger" })
+                                    @if (ViewBag.error != null)
+                                    {
+                                        <span class="badge badge-danger">@ViewBag.error</span>
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <h4>Password</h4>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <h4>Confirm Password</h4>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confim Password" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="submit" class="btn btn-danger" value="Register" />
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+
+            <p><a href="@Url.Action("/LoginPage")">Login</a> if you have a account.</p>
+        </div>
+        <div id="Footer">
+
+        </div>
+    </body>
+</head>
+</html>
